@@ -136,7 +136,7 @@ namespace Work6._6
 
         public void AddWorker(Worker worker)
         {
-            List<Worker> workers = new List<Worker>(GetAllWorkers);  
+            List<Worker> workers = new List<Worker>(GetAllWorkers());  
 
             int ID = workers.Last<Worker>().ID + 1;
             
