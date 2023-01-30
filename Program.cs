@@ -58,6 +58,7 @@ internal class Program
     private static void Main(string[] args)
     {
         int choise;
+        string note = "note.txt";
         Console.WriteLine("Введите '1' или '2'");
 
         while (true) 
@@ -68,7 +69,7 @@ internal class Program
 
             if (choise == 1)
             {
-                ReadFromFile("note.txt");
+                ReadFromFile(note);
             }
             else if (choise == 2)
             {
@@ -79,7 +80,7 @@ internal class Program
                     newEntryInfo[i] = Console.ReadLine();
                 }
 
-                WriteToFile(newEntryInfo, "note.txt");
+                WriteToFile(newEntryInfo, "note");
             }
             else Console.WriteLine("Введите '1' или '2' чтобы продолжить или '0' для выхода");
 
