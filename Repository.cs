@@ -16,6 +16,7 @@ namespace Work6._6
         public Repository(string Path)
         {
             this.path = Path;
+            if(!File.Exists(Path)) File.Create(Path);
         } 
 
         #region Поля
@@ -120,21 +121,6 @@ namespace Work6._6
                     updatedWorkers.Add(worker);
                 }
             }
-
-            //int jump = 0;
-
-            //for (int i = 0; i < workers.Length; i++)
-            //{
-            //    if (workers[i].ID != id)
-            //    {
-            //        workers[i - jump] = workers[i];
-            //    }
-            //    else
-            //    {
-            //        i++;
-            //        jump++;
-            //    }
-            //}
             SaveWorkers(updatedWorkers.ToArray());
         }
 
@@ -144,10 +130,13 @@ namespace Work6._6
         /// <param name="worker">Экземпляр структуры Worker</param>
         public void AddWorker(Worker worker)
         {
-            List<Worker> workers = new List<Worker>(GetAllWorkers());  
+            List<Worker> workers = new List<Worker>(GetAllWorkers());
 
-            int id = workers.Last<Worker>().ID + 1;
-            DateTime date = DateTime.Now; 
+            int id;
+            DateTime date = DateTime.Now;
+
+            if (workers.Count == 0) id = 0;
+            else id = workers.Last<Worker>().ID + 1;
             
             worker.ID = id;
             worker.EntryDate = date;
