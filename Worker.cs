@@ -15,37 +15,41 @@ namespace Work6._6
         /// <param name="EntryDate">Дата создания записи</param>
         /// <param name="FullName">ФИО</param>
         /// <param name="Age">Возраст</param>
+        /// <param name="Height">Рост</param>
         /// <param name="DateOfBirth">Дата рождения</param>
         /// <param name="PlaceOfBirth">Место рождения</param>
-        public Worker (int ID, DateTime EntryDate, string FullName, int Age, DateTime DateOfBirth, string PlaceOfBirth)
+        public Worker (int ID, DateTime EntryDate, string FullName, int Age, int Height, DateTime DateOfBirth, string PlaceOfBirth)
         {
             this.id = ID;
             this.entryDate = EntryDate;
             this.fullName = FullName;
             this.age = Age;
+            this.height = Height;
             this.dateOfBirth = DateOfBirth;
             this.placeOfBirth = PlaceOfBirth;
         }
 
-        public Worker(string FullName, int Age, DateTime DateOfBirth, string PlaceOfBirth) :
-            this(0, DateTime.Now, FullName, Age, DateOfBirth, PlaceOfBirth)  
+        public Worker(string FullName, int Age, int Height, DateTime DateOfBirth, string PlaceOfBirth) :
+            this(0, DateTime.Now, FullName, Age, Height, DateOfBirth, PlaceOfBirth)  
         {
 
         }
 
         #region Поля
 
-        public int id;
+        private int id;
 
-        public DateTime entryDate;
+        private DateTime entryDate;
 
-        public string fullName;
+        private string fullName;
 
-        public int age;
+        private int age;
 
-        public DateTime dateOfBirth;
+        private int height;
 
-        public string placeOfBirth;
+        private DateTime dateOfBirth;
+
+        private string placeOfBirth;
 
         #endregion
 
@@ -67,6 +71,10 @@ namespace Work6._6
         /// Возраст
         /// </summary>
         public int Age { get { return this.age; } set { this.age = value; } }
+        /// <summary>
+        /// Возраст
+        /// </summary>
+        public int Height { get { return this.height; } set { this.height = value; } }
         /// <summary>
         /// Дата рождения
         /// </summary>

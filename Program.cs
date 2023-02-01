@@ -2,91 +2,39 @@
 using System.Reflection.Metadata;
 
 
-internal class Program
+namespace Work6._6
 {
-    static void WriteToFile(string[] text, string fileName)
+    class Program
     {
-        
-        string[] lastLine = new string[7];
-
-        int id = 0;
-
-        DateTime now = new DateTime();
-        now = DateTime.Now;
-
-        if (File.Exists(fileName))
+        private static void Main(string[] args)
         {
-            using (StreamReader sr = new StreamReader(fileName)) 
+            string note = @"note.txt";
+
+            Repository rep = new Repository(note);
+
+            while (true)
             {
-                while(!sr.EndOfStream) lastLine = sr.ReadLine().Split('#');
-                id = lastLine[0] is null ? 1 : int.Parse(lastLine[0]) + 1;
+                rep.WriteWorkerToConsole(rep.GetAllWorkers());
+                Console.ReadLine();
+
+                //Worker Daniel = new Worker("Joe", 24, 183, new DateTime(2003, 07, 28), "Pitsburg");
+                //rep.AddWorker(Daniel);
+                //rep.WriteWorkerToConsole(rep.GetAllWorkers());
+                //Console.ReadLine();
+
+                rep.WriteWorkerToConsole(rep.GetWorkerById(2));
+                Console.ReadLine();
+
+                //rep.DeleteWorker(3);
+                //rep.WriteWorkerToConsole(rep.GetAllWorkers());
+                //Console.ReadLine();
+
+                rep.WriteWorkerToConsole(rep.GetWorkersBetweenTwoDates(new DateTime(2023, 01, 01), DateTime.Now));
+                Console.ReadLine();
+                
             }
+
+
         }
-
-        using (StreamWriter sw = new StreamWriter(fileName, true))
-        {
-            string newEntry = Convert.ToString(id) + '#' + now.ToString("dd.MM.yyyy hh:mm");
-            foreach (var i in text)
-            {
-                newEntry += '#' + i.Trim();
-            }
-
-            sw.WriteLine(newEntry);
-        }
-    }
-
-    static void ReadFromFile(string fileName)
-    {
-        if (File.Exists(fileName))
-        {
-            string[] text = new string[7];
-            using (StreamReader sr = new StreamReader(fileName))
-            {
-                Console.WriteLine($"ID {"EntryDate",-16} {"FullName",-32} Age Height DateOfBirth PlaceOfBirth");
-                while (!sr.EndOfStream)
-                {
-                    text = sr.ReadLine().Split('#');
-                    Console.WriteLine($"{text[0],-2} {text[1]} {text[2],-32} {text[3],-3} {text[4],-6} {text[5],-11} {text[6]}");
-                }
-            }
-        }
-        else Console.WriteLine("Базы данных не существует, нажмите '2' для создания");
-    }
-
-
-
-    private static void Main(string[] args)
-    {
-        int choise;
-        string note = "note.txt";
-        Console.WriteLine("Введите '1' или '2'");
-
-        while (true) 
-        {
-            choise = int.Parse(Console.ReadLine());
-
-            string[] newEntryInfo = new string[] { "Ф.И.О", "Возраст", "Рост", "Дата рождения", "Место рождения" };
-
-            if (choise == 1)
-            {
-                ReadFromFile(note);
-            }
-            else if (choise == 2)
-            {
-                Console.WriteLine("Введите следующие данные:");
-                for (int i = 0; i < newEntryInfo.Length; i++)
-                {
-                    Console.Write($"\t - {newEntryInfo[i]}: ");
-                    newEntryInfo[i] = Console.ReadLine();
-                }
-
-                WriteToFile(newEntryInfo, "note");
-            }
-            else Console.WriteLine("Введите '1' или '2' чтобы продолжить или '0' для выхода");
-
-            if (choise == 0) break;
-        }
-
-
     }
 }
