@@ -16,7 +16,7 @@ namespace Work6._6
         public Repository(string Path)
         {
             this.path = Path;
-            if(!File.Exists(Path)) File.Create(Path);
+            if(!File.Exists(Path)) using (File.Create(Path));
         } 
 
         #region Поля
@@ -102,7 +102,7 @@ namespace Work6._6
                     return worker;
                 }
             }
-            return new Worker(-1, new DateTime(0, 0, 0), "0", 0, 0, new DateTime(0, 0, 0), "0");
+            return new Worker(-1, new DateTime(1111, 01, 01), "0", 0, 0, new DateTime(1111, 01, 01), "0");
         }
 
         /// <summary>

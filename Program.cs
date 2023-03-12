@@ -14,23 +14,24 @@ namespace Work6._6
 
             while (true)
             {
-                rep.WriteWorkerToConsole(rep.GetAllWorkers());
-                Console.ReadLine();
-
-                //Worker Daniel = new Worker("Joe", 24, 183, new DateTime(2003, 07, 28), "Pitsburg");
-                //rep.AddWorker(Daniel);
                 //rep.WriteWorkerToConsole(rep.GetAllWorkers());
                 //Console.ReadLine();
 
-                rep.WriteWorkerToConsole(rep.GetWorkerById(2));
-                Console.ReadLine();
+                //Worker Daniel = new Worker("Joe", 24, 183, new DateTime(2003, 07, 28), "Pitsburg");
+                //rep.AddWorker(Daniel);
+
+                rep.WriteWorkerToConsole(rep.GetAllWorkers());
+                //Console.ReadLine();
+
+                rep.WriteWorkerToConsole(rep.GetWorkerById(99));
+                //Console.ReadLine();
 
                 //rep.DeleteWorker(3);
                 //rep.WriteWorkerToConsole(rep.GetAllWorkers());
                 //Console.ReadLine();
 
-                rep.WriteWorkerToConsole(rep.GetWorkersBetweenTwoDates(new DateTime(2023, 01, 01), DateTime.Now));
-                Console.ReadLine();
+                //rep.WriteWorkerToConsole(rep.GetWorkersBetweenTwoDates(new DateTime(2023, 01, 01), DateTime.Now));
+                //Console.ReadLine();
                 
             }
 
