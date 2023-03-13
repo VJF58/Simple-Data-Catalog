@@ -1,4 +1,5 @@
 ﻿using System.Dynamic;
+using System.Globalization;
 using System.Reflection.Metadata;
 
 
@@ -14,25 +15,64 @@ namespace Work6._6
 
             while (true)
             {
-                //rep.WriteWorkerToConsole(rep.GetAllWorkers());
-                //Console.ReadLine();
+                Console.WriteLine("0 - просмотреть все записи, \n" +
+                    "1 - добавить запись, \n" +
+                    "2 - удалить запись по id, \n" +
+                    "3 - найти запись по id, \n" +
+                    "4 - найти записи между двумя датами, \n" +
+                    "9 - ВЫХОД \n");
 
-                //Worker Daniel = new Worker("Joe", 24, 183, new DateTime(2003, 07, 28), "Pitsburg");
-                //rep.AddWorker(Daniel);
+                int code = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
 
-                rep.WriteWorkerToConsole(rep.GetAllWorkers());
-                //Console.ReadLine();
+                switch (code) 
+                {
+                    case 0:
+                        rep.WriteWorkerToConsole(rep.GetAllWorkers());
+                        break;
+                        
+                    case 1:
+                        Console.WriteLine("Введите ФИО, возраст, рост, дату и место рождения сотрудника: ");
 
-                rep.WriteWorkerToConsole(rep.GetWorkerById(99));
-                //Console.ReadLine();
+                        string[] newWorker = new string[5];
 
-                //rep.DeleteWorker(3);
-                //rep.WriteWorkerToConsole(rep.GetAllWorkers());
-                //Console.ReadLine();
+                        for (int i = 0; i < newWorker.Length; i++)
+                        {
+                            newWorker[i] = Console.ReadLine();
+                        }
 
-                //rep.WriteWorkerToConsole(rep.GetWorkersBetweenTwoDates(new DateTime(2023, 01, 01), DateTime.Now));
-                //Console.ReadLine();
-                
+                        rep.AddWorker(newWorker);
+                        break; 
+
+                    case 2:
+                        Console.WriteLine("Введите id записи которую нужно удалить: ");
+
+                        rep.DeleteWorker(Convert.ToInt32(Console.ReadLine()));
+
+                        Console.WriteLine("Запись удалена!");
+                        break; 
+
+                    case 3:
+                        rep.WriteWorkerToConsole(rep.GetWorkerById(Convert.ToInt32(Console.ReadLine())));
+                        break;
+
+                    case 4:
+                        Console.WriteLine("Введите две даты, между которыми нужно произвести поиск: ");
+
+                        Worker[] workers = rep.GetWorkersBetweenTwoDates(DateTime.ParseExact(Console.ReadLine(), "dd.MM.yyyy", null), DateTime.ParseExact(Console.ReadLine(), "dd.MM.yyyy", null));
+                        rep.WriteWorkerToConsole(workers);
+                        
+                        break;
+                    case 9: break;
+                    default:
+                        Console.WriteLine("Код операции введен неверно!");
+
+                        break;
+                }
+
+                Console.WriteLine();
+
+                if (code == 9) break;
             }
 
 

@@ -16,7 +16,11 @@ namespace Work6._6
         public Repository(string Path)
         {
             this.path = Path;
-            if(!File.Exists(Path)) using (File.Create(Path));
+            if (!File.Exists(Path))
+            {
+                using (File.Create(Path));
+                Console.WriteLine("Файлы локального справочника созданы");
+            }
         } 
 
         #region Поля
@@ -34,7 +38,15 @@ namespace Work6._6
         /// <returns>Экземпляр структуры Worker</returns>
         private Worker StrArrayToWorker(string[] strings)
         {
-            return new Worker(int.Parse(strings[0]), DateTime.ParseExact(strings[1], "dd.MM.yyyy hh:mm", null), strings[2], int.Parse(strings[3]), int.Parse(strings[4]), DateTime.ParseExact(strings[5], "dd.MM.yyyy", null), strings[6]);
+            if (strings.Length == 5 )
+            {
+                return new Worker(strings[0], int.Parse(strings[1]), int.Parse(strings[2]), DateTime.ParseExact(strings[3], "dd.MM.yyyy", null), strings[4]);
+            }
+            else
+            {
+                return new Worker(int.Parse(strings[0]), DateTime.ParseExact(strings[1], "dd.MM.yyyy hh:mm", null), strings[2], int.Parse(strings[3]), int.Parse(strings[4]), DateTime.ParseExact(strings[5], "dd.MM.yyyy", null), strings[6]);
+            }
+
         }
 
         /// <summary>
@@ -128,19 +140,18 @@ namespace Work6._6
         /// Добавляет рабочего в файл и сохраняет его
         /// </summary>
         /// <param name="worker">Экземпляр структуры Worker</param>
-        public void AddWorker(Worker worker)
+        public void AddWorker(string[] strings)
         {
+            Worker worker = StrArrayToWorker(strings);
             List<Worker> workers = new List<Worker>(GetAllWorkers());
 
             int id;
-            DateTime date = DateTime.Now;
 
             if (workers.Count == 0) id = 0;
             else id = workers.Last<Worker>().ID + 1;
             
             worker.ID = id;
-            worker.EntryDate = date;
-            
+
             workers.Add(worker);
 
             SaveWorkers(workers.ToArray());
